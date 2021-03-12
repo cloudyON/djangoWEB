@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 from django_extensions.db.models import TimeStampedModel, ActivatorModel
 from simple_history.models import HistoricalRecords
 
@@ -30,7 +31,13 @@ class Product(TimeStampedModel, ActivatorModel):
     class Meta:
         verbose_name = '상품'
         verbose_name_plural = '상품 모음'
-        ordering = ['pd_num', ]
+        ordering = ['pd_num']
 
     def __str__(self):
         return f'{self.pd_num} {self.name}'
+
+    def save(self, *args, **kwargs):
+        self.update_modified = kwargs.pop('update_modified', getattr(self, 'update_modified', True))
+        if not self.activate_date:
+            self.activate_date = now()
+        super().save(**kwargs)

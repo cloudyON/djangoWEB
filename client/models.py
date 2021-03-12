@@ -1,5 +1,7 @@
-from django.db import models
 import random
+
+from django.db import models
+
 
 class Product(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True)
@@ -10,7 +12,7 @@ class Product(models.Model):
         verbose_name_plural = '북마크 모음'
         ordering = ['title', ]
 
-    
+
     def __init__(self):
         self.productNum = [] # 상품의 식별번호
         self.productName = [] # 상품의 이름
@@ -37,12 +39,12 @@ class Product(models.Model):
 
         return "".join(output)
 
-        
-            
+
+
 
     def creProduct(self, name, price, types, acti : 'activation' ):
         # 중복 제거
-        if name in self.productName : 
+        if name in self.productName :
             return
         # --------------------------------------------
 
@@ -71,9 +73,9 @@ class Product(models.Model):
             return
 
     def update(self, name, price, types):
-        if name in self.productName : 
+        if name in self.productName :
             a = self.productName.index(name)
-            
+
             self.productName[a] = str(name)
             self.productPrice[a] = int(price)
             if types in self.proType:
@@ -81,7 +83,7 @@ class Product(models.Model):
         else :
             return
 
-    
+
 
 
     def str(self):

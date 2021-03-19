@@ -5,8 +5,8 @@ from apps.logistics.models import Product
 
 
 class ProductAdmin(SimpleHistoryAdmin):
-    list_display = ('paymentWay', 'ordererPay', 'cardName', 'point')
-    history_list_display = ('paymentWay', 'ordererPay', 'cardName', 'point')
+    list_display = ('pd_num', 'name', 'price', 'kind', 'status')
+    history_list_display = ('pd_num', 'name', 'price', 'kind', 'status')
     search_fields = ['paymentWay', 'name']
 
 admin.site.register(Product, ProductAdmin)
